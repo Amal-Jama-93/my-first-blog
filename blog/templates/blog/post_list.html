@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBlogy</title>
-</head>
-<body>
-    <div>
-        <h1><a href="/">Blog</a></h1>
-    </div>
-    
-    <div>
+{% extends 'blog/base.html' %}
+
+{% block content %}
         {% for post in posts %}
-        <div>
-            <p>published: {{ post.published_date }}</p>
-            <h2><a href="">{{ post.title }}</a></h2>
-            <p>{{ post.text|linebreaksbr }}</p>
-        </div>
-        {% endfor %}
-    </div>
-    
-</body>
-</html>
+            <div class="posts">
+                <p class="date-published">Published: {{ post.published_date }}</p>
+                <h2 class="post__title"><a href="{% url 'post_detail' pk=post.pk %}" >{{ post.title }}</a></h2>
+                <p class="post__text">{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}      
+{% endblock %}
